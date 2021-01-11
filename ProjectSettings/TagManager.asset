@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Rantanplan
+  - Jolly
+  - Joe
+  - Kaktus
+  - Feuer
+  - Fels
+  - Explosion
+  - "Fu\xDFabdr\xFCcke"
+  - InteractableObject
+  - ExitButton
   layers:
   - Default
   - TransparentFX
