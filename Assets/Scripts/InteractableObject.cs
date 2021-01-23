@@ -21,10 +21,6 @@ public class InteractableObject : MonoBehaviour
 
     public int gameStatus;
 
-    public Vector3 exitButtonNormal = new Vector3(38, -32,0);
-    public Vector3 exitButtonUp = new Vector3(38, -2, 0);
-    public Transform exitButton;
-
     public SpriteRenderer sr;
     public Image img;
 
@@ -89,7 +85,7 @@ public class InteractableObject : MonoBehaviour
         uiManager.activeIO = this;
     }
 
-    public void OnMouseDown()
+    public void OnMouseUp()
     {
         Debug.Log("MouseDown");
         Debug.Log(uiManager.introSequence);

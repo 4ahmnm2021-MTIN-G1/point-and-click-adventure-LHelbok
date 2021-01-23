@@ -37,6 +37,11 @@ public class UI_Manager : MonoBehaviour
 
     public bool hoverObjectNames;
 
+    public CameraShake camShake;
+
+    public GameObject player;
+    public GameObject sleepingLuke;
+
     public void DisplayText()
     {
         switch (activeIO.gameStatus)
@@ -76,7 +81,18 @@ public class UI_Manager : MonoBehaviour
     {
         rock.SetActive(true);
         explosionRock.SetActive(false);
-        leatherBoardText = "Spiel beginnt... + Instruktionen";
+        //leatherBoardText = "Hallo Lucky Luke. \n  " +
+        //    "Joe Dalton ist schon wieder aus dem Gefängnis ausgebrochen. \n " +
+        //    "Bring ihn uns bitte wieder zurück. \n  " +
+        //    "Danke, der Gefängnisdirektor \n  " +
+        //    "P.S. Er ist in die Wüste geflohen."; //Text am Spielanfang
+        leatherBoardText = " Hallo Lucky Luke! \n" +
+            " Joe Dalton ist aus dem Gefängnis ausgebrochen! \n" +
+            " Fange ihn wieder ein. \n" +
+            " Mit `Inspect` siehst du was du mit Objekten machen kannst \n " +
+            "Mit ‚Talk‘ sprichst du mit den anderen Charakteren\n " +
+            "Mit ‚Collect‘ sammelst du Items ein \n " +
+            "Viel Glück! \n";
         ExecuteLeatherBoard(leatherBoardText);
         GameObject.FindWithTag("Feuer").GetComponent<InteractableObject>().SetGameStatus(0);
         GameObject.FindWithTag("Joe").GetComponent<InteractableObject>().SetGameStatus(0);
@@ -85,12 +101,16 @@ public class UI_Manager : MonoBehaviour
         GameObject.FindWithTag("Rantanplan").GetComponent<InteractableObject>().SetGameStatus(1);
         GameObject.FindWithTag("Kaktus").GetComponent<InteractableObject>().img.sprite = null;
         GameObject.FindWithTag("Feuer").GetComponent<InteractableObject>().img.sprite = null;
+        player.SetActive(false);
+        sleepingLuke.SetActive(true);
         joeDalton.SetActive(false);
         joeArrested = false;
         isRopeCollected = false;
         timer = 0.0f;
         hoverObjectNames = false;
-        //GameObject.FindWithTag("InteractableObject").SetActive(false);
+        dialogFenster.text = "";
+
+
     }
 
     public void executeHoverNames(bool paramHoverName)
@@ -100,16 +120,23 @@ public class UI_Manager : MonoBehaviour
 
     public void ExecuteLeatherBoard(string displayText)
     {
+        player.SetActive(false);
         leatherBoardTextField.text = displayText;
         leatherBoard.SetActive(true);
         introSequence = true;
+        sleepingLuke.SetActive(false);
+        dialogFenster.text = "";
     }
 
     public void DeactiveLeatherBoard()
-    { 
+    {
+        player.SetActive(true);
         leatherBoard.SetActive(false);
         introSequence = false;
         hoverObjectNames = true;
+        sleepingLuke.SetActive(true);
+        sleepingLuke.SetActive(false);
+        dialogFenster.text = "";
         if (joeArrested) // Joe ist verhaftet
         {
             Start();
@@ -135,9 +162,8 @@ public class UI_Manager : MonoBehaviour
         if (timerEnabled)
         {
             timer += Time.deltaTime;
-            if (timer > 1)
+            if (timer > 0.8f)
             {
-                
                 explosionRock.SetActive(false);
                 timerEnabled = false;
             }
@@ -193,6 +219,7 @@ public class UI_Manager : MonoBehaviour
             activeIO.gameStatus = 3;
             rock.SetActive(false);
             explosionRock.SetActive(true);
+            camShake.ShakeIt();
             activeIO.commandMenu.SetActive(false);
             joeDalton.SetActive(true);
             timerEnabled = true;
@@ -205,14 +232,14 @@ public class UI_Manager : MonoBehaviour
             if (isRopeCollected)
             {
                 activeIO.commandMenu.SetActive(false);
-                leatherBoardText = "Super, du hast Joe Dalton eingefangen! DU hast das Spiel gewonnen!";
+                leatherBoardText = "Super, du hast Joe Dalton eingefangen! \n\n Du hast das Spiel gewonnen!"; //Text wenn der Spieler gewonnen hat
                 ExecuteLeatherBoard(leatherBoardText);
                 hoverObjectNames = false;
             }
             else
             {
                 activeIO.commandMenu.SetActive(false);
-                leatherBoardText = "Du hast verloren. Du hast kein Seil um Joe festzunehmen!";
+                leatherBoardText = "Du hast verloren! \n\n Du hast kein Seil um Joe festzunehmen!"; //Text wenn der Spieler verloren hat
                 ExecuteLeatherBoard(leatherBoardText);
                 hoverObjectNames = false;
             }
