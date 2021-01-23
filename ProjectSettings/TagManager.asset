@@ -14,6 +14,8 @@ TagManager:
   - "Fu\xDFabdr\xFCcke"
   - InteractableObject
   - ExitButton
+  - Screenshake
+  - SleepingLuke
   layers:
   - Default
   - TransparentFX
