@@ -1,8 +1,8 @@
-﻿using JetBrains.Annotations;
+﻿//using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+//using System.Linq;
+//using System.Linq.Expressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -41,6 +41,11 @@ public class UI_Manager : MonoBehaviour
 
     public GameObject player;
     public GameObject sleepingLuke;
+
+    public AudioSource lightMatch;
+
+    public AudioSource winVoice;
+    public AudioSource loseVoice;
 
     public void DisplayText()
     {
@@ -81,11 +86,6 @@ public class UI_Manager : MonoBehaviour
     {
         rock.SetActive(true);
         explosionRock.SetActive(false);
-        //leatherBoardText = "Hallo Lucky Luke. \n  " +
-        //    "Joe Dalton ist schon wieder aus dem Gefängnis ausgebrochen. \n " +
-        //    "Bring ihn uns bitte wieder zurück. \n  " +
-        //    "Danke, der Gefängnisdirektor \n  " +
-        //    "P.S. Er ist in die Wüste geflohen."; //Text am Spielanfang
         leatherBoardText = " Hallo Lucky Luke! \n" +
             " Joe Dalton ist aus dem Gefängnis ausgebrochen! \n" +
             " Fange ihn wieder ein. \n" +
@@ -171,8 +171,6 @@ public class UI_Manager : MonoBehaviour
     }
 
 
-
-
     public void TalkOrCollect()
     {
         if (activeIO.gameStatus == 1 && activeIO.gameObject.tag == "Rantanplan") // Talk
@@ -209,6 +207,7 @@ public class UI_Manager : MonoBehaviour
         {
             dialogFenster.text = "Dynamitstange erfolgreich angezündet";
             activeIO.img.sprite = activeIO.sr.sprite;
+            lightMatch.Play();
             activeIO.gameStatus = 3;
 
             GameObject.FindWithTag("Fels").GetComponent<InteractableObject>().SetGameStatus(5);
@@ -225,6 +224,7 @@ public class UI_Manager : MonoBehaviour
             timerEnabled = true;
             GameObject.FindWithTag("Kaktus").GetComponent<InteractableObject>().SetGameStatus(0);
             GameObject.FindWithTag("Joe").GetComponent<InteractableObject>().SetGameStatus(6);
+            GameObject.FindWithTag("Feuer").GetComponent<InteractableObject>().img.sprite = null;
         }
         if (activeIO.gameStatus == 6 && activeIO.gameObject.tag == "Joe") // Arrest
         {
@@ -235,6 +235,8 @@ public class UI_Manager : MonoBehaviour
                 leatherBoardText = "Super, du hast Joe Dalton eingefangen! \n\n Du hast das Spiel gewonnen!"; //Text wenn der Spieler gewonnen hat
                 ExecuteLeatherBoard(leatherBoardText);
                 hoverObjectNames = false;
+                GameObject.FindWithTag("Kaktus").GetComponent<InteractableObject>().img.sprite = null;
+                winVoice.Play();
             }
             else
             {
@@ -242,21 +244,10 @@ public class UI_Manager : MonoBehaviour
                 leatherBoardText = "Du hast verloren! \n\n Du hast kein Seil um Joe festzunehmen!"; //Text wenn der Spieler verloren hat
                 ExecuteLeatherBoard(leatherBoardText);
                 hoverObjectNames = false;
+                loseVoice.Play();
             }
            
         
         }
-
-
-        //public void LightFuse()
-        //{
-        //    activeIO.img.sprite = activeIO.fire.sprite;
-        //    dialogFenster.text = "Die Dynamitstange wurde angezündet";
-        //}
-
-        //public void DisplayTextFire()
-        //{
-        //    dialogFenster.text = "Du kannst mit dem Feuer die Dynamitstange anzünden.";
-        //}
     }
 }
