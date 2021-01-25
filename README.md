@@ -6,7 +6,7 @@ This game is a point and click adventure where the player, as Lucky Luke, has to
 The player gets help from Rantanplan, his Dog and Jolly Jumper, his Horse.
 The game was inspired by the Lucky Luke Comics and the Lucky Luke TV Series.
 
-The game can be played with this link:
+The game can be played with this link: https://4ahmnm2021-mtin-g1.github.io/point-and-click-adventure-LHelbok/index.html
 
 ### Development platform: 
 
@@ -21,7 +21,7 @@ WebGL 1280x720
 
 ### Necessary setup/execution steps: 
 
-WebGL has to be installed and stable internet connection is necessairy
+WebGL has to be installed and stable internet connection is necessary
 
 ### Project state: 
 100%
