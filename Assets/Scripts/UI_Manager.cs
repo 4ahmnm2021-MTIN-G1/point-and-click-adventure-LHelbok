@@ -170,6 +170,16 @@ public class UI_Manager : MonoBehaviour
         }
     }
 
+    public void InteractableObjectsActive()
+    {
+
+    }
+
+    public void InteractableObjectsDeactive()
+    {
+        
+    }
+
 
     public void TalkOrCollect()
     {
