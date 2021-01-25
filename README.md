@@ -2,11 +2,12 @@
 
 ### Project description: 
 
-This game is a point and click adventure where the player, as Lucky Luke, has to capture Joe Dalton.
-The player gets help from Rantanplan, his Dog and Jolly Jumper, his Horse.
-The game was inspired by the Lucky Luke Comics and the Lucky Luke TV Series.
+You are the lonesome Cowboy Lucky Luke who has to recapture Joe Dalton, a crook who broke out of prison.
+Fear not, great Cowboy for all it's worth you have two companions to help you in your quest. 
+Jolly Jumper, your faithful snarky horse and Rantanplan, your dog will aid you in the capture.
+Good luck cowboy!
 
-The game can be played with this link: https://4ahmnm2021-mtin-g1.github.io/point-and-click-adventure-LHelbok/index.html
+The game can be played here: https://4ahmnm2021-mtin-g1.github.io/point-and-click-adventure-LHelbok/index.html
 
 ### Development platform: 
 
@@ -17,7 +18,12 @@ The game can be played with this link: https://4ahmnm2021-mtin-g1.github.io/poin
 - Scripting Runtime Version: 4.X;
 
 ### Target platform: 
+
 WebGL 1280x720
+
+### Limitations:
+
+None
 
 ### Necessary setup/execution steps: 
 
